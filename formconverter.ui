@@ -1,0 +1,1129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>FormConverter</class>
+ <widget class="QWidget" name="FormConverter">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>350</width>
+    <height>120</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>350</width>
+    <height>120</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>350</width>
+    <height>120</height>
+   </size>
+  </property>
+  <property name="baseSize">
+   <size>
+    <width>450</width>
+    <height>120</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Конвертер единиц измерения</string>
+  </property>
+  <widget class="QTabWidget" name="tabWidget">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>350</width>
+     <height>120</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>350</width>
+     <height>120</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>350</width>
+     <height>120</height>
+    </size>
+   </property>
+   <property name="baseSize">
+    <size>
+     <width>200</width>
+     <height>120</height>
+    </size>
+   </property>
+   <property name="currentIndex">
+    <number>0</number>
+   </property>
+   <widget class="QWidget" name="tab">
+    <attribute name="title">
+     <string>Длина</string>
+    </attribute>
+    <widget class="QComboBox" name="comboBoxInputUnits">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>36</y>
+       <width>161</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <item>
+      <property name="text">
+       <string>нанометр</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>микрон</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>милиметр</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>сантиметр</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>дюйм</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>дециметр</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>фут</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>ярд</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>метр</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>кабельтов</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>километр</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>верста</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>сухопутная миля</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>морская миля</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QPushButton" name="pushButtonConvert">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>62</y>
+       <width>161</width>
+       <height>19</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Конвертировать</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButtonClose">
+     <property name="geometry">
+      <rect>
+       <x>185</x>
+       <y>62</y>
+       <width>151</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Выйти</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEditOutput">
+     <property name="geometry">
+      <rect>
+       <x>185</x>
+       <y>10</y>
+       <width>151</width>
+       <height>20</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBoxOutputUnits">
+     <property name="geometry">
+      <rect>
+       <x>185</x>
+       <y>36</y>
+       <width>151</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <item>
+      <property name="text">
+       <string>нанометр</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>микрон</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>милиметр</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>сантиметр</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>дюйм</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>дециметр</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>фут</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>ярд</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>метр</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>кабельтов</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>километр</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>верста</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>сухопутная миля</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>морская миля</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QDoubleSpinBox" name="doubleSpinBoxDistanceInput">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>161</width>
+       <height>20</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab_3">
+    <attribute name="title">
+     <string>Площадь</string>
+    </attribute>
+    <layout class="QGridLayout" name="gridLayout_2">
+     <item row="0" column="0">
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="QDoubleSpinBox" name="doubleSpinBoxAreaInput">
+         <property name="maximum">
+          <double>999999999999.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBoxAreaInputUnits">
+         <item>
+          <property name="text">
+           <string>мм2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>см2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>кв.дюйм</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>дм2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>кв.фут</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>кв.ярд</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>м2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>сотка</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>десятина</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>акр</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>гектар</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>км2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>кв. сухопутная миля</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>кв. морская миля</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButtonAreaConvert">
+         <property name="text">
+          <string>Конвертировать</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="0" column="1">
+      <layout class="QVBoxLayout" name="verticalLayout_4">
+       <item>
+        <widget class="QLineEdit" name="lineEditAreaOutput"/>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBoxAreaOutputUnits">
+         <item>
+          <property name="text">
+           <string>мм2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>см2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>кв.дюйм</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>дм2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>кв.фут</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>кв.ярд</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>м2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>сотка</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>десятина</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>акр</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>гектар</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>км2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>кв. сухопутная миля</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>кв. морская миля</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButtonAreaClose">
+         <property name="text">
+          <string>Выйти</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="tab_4">
+    <attribute name="title">
+     <string>Объем</string>
+    </attribute>
+    <layout class="QGridLayout" name="gridLayout_3">
+     <item row="0" column="1">
+      <layout class="QVBoxLayout" name="verticalLayout_6">
+       <item>
+        <widget class="QLineEdit" name="lineEditVolumeOutput"/>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBoxVolumeOutputUnits">
+         <item>
+          <property name="text">
+           <string>мм3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>см3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>куб.дюйм</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>дм3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>куб.фут</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>куб.ярд</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>американская кварта</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>литр</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>английская кварта</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>американский галлон</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>английский галлон</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>баррель</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>м3</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButtonVolumeClose">
+         <property name="text">
+          <string>Выйти</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="0" column="0">
+      <layout class="QVBoxLayout" name="verticalLayout_5">
+       <item>
+        <widget class="QDoubleSpinBox" name="doubleSpinBoxVolumeInput"/>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBoxVolumeInputUnits">
+         <item>
+          <property name="text">
+           <string>мм3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>см3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>куб.дюйм</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>дм3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>куб.фут</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>куб.ярд</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>американская кварта</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>литр</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>английская кварта</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>американский галлон</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>английский галлон</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>баррель</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>м3</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButtonVolumeUnitsConvert">
+         <property name="text">
+          <string>Конвертировать</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="tab_5">
+    <attribute name="title">
+     <string>Масса</string>
+    </attribute>
+    <layout class="QGridLayout" name="gridLayout_4">
+     <item row="0" column="0">
+      <layout class="QVBoxLayout" name="verticalLayout_7">
+       <item>
+        <widget class="QDoubleSpinBox" name="doubleSpinBoxMassInput">
+         <property name="maximum">
+          <double>9999999999.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBoxMassInputUnits">
+         <item>
+          <property name="text">
+           <string>Микрограмм</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Милиграмм</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Карат</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Грамм</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Унция</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Фунт</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Килограмм</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Пуд</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Центнер</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Тонна</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Килотонна</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButtonMassConvert">
+         <property name="text">
+          <string>Конвертировать</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="0" column="1">
+      <layout class="QVBoxLayout" name="verticalLayout_8">
+       <item>
+        <widget class="QLineEdit" name="lineEditMassOutput"/>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBoxMassOutputUnits">
+         <item>
+          <property name="text">
+           <string>Микрограмм</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Милиграмм</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Карат</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Грамм</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Унция</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Фунт</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Килограмм</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Пуд</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Центнер</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Тонна</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Килотонна</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButtonMassClose">
+         <property name="text">
+          <string>Выйти</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="tab_2">
+    <attribute name="title">
+     <string>Давление</string>
+    </attribute>
+    <layout class="QGridLayout" name="gridLayout_5">
+     <item row="0" column="0">
+      <layout class="QVBoxLayout" name="verticalLayout_9">
+       <item>
+        <widget class="QDoubleSpinBox" name="doubleSpinBoxPressureInput">
+         <property name="maximum">
+          <double>100000000000000000.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBoxPressureInputUnits">
+         <item>
+          <property name="text">
+           <string>Па</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>мм.рт.ст.</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>кПа</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>psi(фунт на кв. дюйм)</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>мм.вод.ст.</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Атмосфера техническая</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>кгс / см2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Бар</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>МПа</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Атмосфера физическая</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButtonPressureConvert">
+         <property name="text">
+          <string>Конвертировать</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="0" column="1">
+      <layout class="QVBoxLayout" name="verticalLayout_10">
+       <item>
+        <widget class="QLineEdit" name="lineEditPressureOutput"/>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBoxPressureOutputUnits">
+         <item>
+          <property name="text">
+           <string>Па</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>мм.рт.ст.</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>кПа</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>psi(фунт на кв. дюйм)</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>мм.вод.ст.</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Атмосфера техническая</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>кгс / см2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Бар</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>МПа</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Атмосфера физическая</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButtonPressureClose">
+         <property name="text">
+          <string>Выйти</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="tab_6">
+    <attribute name="title">
+     <string>Температура</string>
+    </attribute>
+    <layout class="QGridLayout" name="gridLayout_6">
+     <item row="0" column="0">
+      <layout class="QVBoxLayout" name="verticalLayout_11">
+       <item>
+        <widget class="QDoubleSpinBox" name="doubleSpinBoxTemperatureInput">
+         <property name="maximum">
+          <double>1000000000000000000000.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBoxTemperatureInputUnits">
+         <item>
+          <property name="text">
+           <string>по Цельсию</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>по Кельвину</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>по Фаренгейту</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButtonTemperatureConvert">
+         <property name="text">
+          <string>Конвертировать</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="0" column="1">
+      <layout class="QVBoxLayout" name="verticalLayout_12">
+       <item>
+        <widget class="QLineEdit" name="lineEditTemperatureOutput"/>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBoxTemperatureOutputUnits">
+         <item>
+          <property name="text">
+           <string>по Цельсию</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>по Кельвину</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>по Фаренгейту</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButtonTemperatureClose">
+         <property name="text">
+          <string>Выйти</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="tab_7">
+    <attribute name="title">
+     <string>Скорость</string>
+    </attribute>
+    <layout class="QGridLayout" name="gridLayout_7">
+     <item row="0" column="0">
+      <layout class="QVBoxLayout" name="verticalLayout_13">
+       <item>
+        <widget class="QDoubleSpinBox" name="doubleSpinBoxSpeedInput">
+         <property name="maximum">
+          <double>1000000000000000000000.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBoxSpeedInputUnits">
+         <item>
+          <property name="text">
+           <string>м/с</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>км/час</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>км/с</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>мили/час</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>узлы(для судов)</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButtonSpeedConvert">
+         <property name="text">
+          <string>Конвертировать</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="0" column="1">
+      <layout class="QVBoxLayout" name="verticalLayout_14">
+       <item>
+        <widget class="QLineEdit" name="lineEditSpeedOutput"/>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBoxSpeedOutputUnits">
+         <item>
+          <property name="text">
+           <string>м/с</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>км/час</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>км/с</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>мили/час</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>узлы(для судов)</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButtonSpeedClose">
+         <property name="text">
+          <string>Выйти</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
