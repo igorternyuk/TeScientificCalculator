@@ -176,6 +176,7 @@ double Parser::evaluateExpression(const Expression &e)
     }
     case 1: {
         auto a = evaluateExpression(e.args[0]);
+        if (e.token == "e") return pow(10, a);
         if (e.token == "+") return +a;
         if (e.token == "-") return -a;
         if (e.token == "!") return (a != 0) ? 0 : 1;

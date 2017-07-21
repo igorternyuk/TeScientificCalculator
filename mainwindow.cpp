@@ -434,7 +434,7 @@ void MainWindow::on_pushButtonSecans_clicked()
 void MainWindow::on_pushButtonCosecans_clicked()
 {
     if(ui->comboBoxTrHyp->currentIndex() == 0)
-        insertOperatorName("ccecans()");
+        insertOperatorName("csecans()");
     else
         insertOperatorName("csech()");
 }
