@@ -37,7 +37,7 @@
   <property name="windowTitle">
    <string>Численное решение уравнений</string>
   </property>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -234,7 +234,11 @@
        </widget>
       </item>
       <item>
-       <widget class="QTextEdit" name="textEditIterProcess"/>
+       <widget class="QTextEdit" name="textEditIterProcess">
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
       </item>
       <item>
        <layout class="QFormLayout" name="formLayout_5">

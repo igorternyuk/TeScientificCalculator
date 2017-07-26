@@ -1,11 +1,13 @@
+#include <QMessageBox>
+#include <stdexcept>
 #include "formintegral.h"
 #include "ui_formintegral.h"
-#include "parser.h"
+#include "matematica.h"
 #ifdef DEBUG
 #include <QDebug>
 #endif
-#include <QMessageBox>
-#include <stdexcept>
+
+using namespace iat;
 
 FormIntegral::FormIntegral(QWidget *parent) :
     QWidget(parent),

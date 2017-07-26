@@ -4,7 +4,11 @@
 #ifdef DEBUG
 #include <QDebug>
 #endif
+
 #include "parser.h"
+#include "matematica.h"
+
+using namespace iat;
 
 FormDerivative::FormDerivative(QWidget *parent) :
     QWidget(parent),

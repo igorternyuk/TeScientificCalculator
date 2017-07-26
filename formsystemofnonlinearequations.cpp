@@ -5,14 +5,13 @@
 #include <stdexcept>
 #include <vector>
 #include <QStringList>
-#include <math.h>
 #include "matematica.h"
-#include "parser.h"
 #include "doublespinboxdelegate.h"
+#include <fstream>
+
 #ifdef DEBUG
 #include <QDebug>
 #endif
-#include <fstream>
 
 FormSystemOfNonLinearEquations::FormSystemOfNonLinearEquations(QWidget *parent) :
     QWidget(parent),
@@ -79,7 +78,7 @@ void FormSystemOfNonLinearEquations::on_pushButtonCalculate_clicked()
         mResult->setRowCount(equations1.size());
         mResult->setColumnCount(1);
         std::string iterProcess;
-        std::vector<double> result = solveSystemOfNonLinearEquations(equations1, varList, eps,
+        std::vector<double> result = iat::solveSystemOfNonLinearEquations(equations1, varList, eps,
                                                                      numberOfIterrations, error, iterProcess);
         ui->textEditIterProcess->clear();
         ui->textEditIterProcess->setText(QString::fromStdString(iterProcess));

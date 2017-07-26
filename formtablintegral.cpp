@@ -5,7 +5,6 @@
 #include <QStringList>
 #include "doublespinboxdelegate.h"
 #include "matematica.h"
-#include "matrix.h"
 
 FormTablIntegral::FormTablIntegral(QWidget *parent) :
     QWidget(parent),
@@ -54,20 +53,20 @@ void FormTablIntegral::on_pushButtonCalculate_clicked()
         }
         if(ui->radioButtonLeftRect->isChecked())
         {
-            res = integralTablLeftHandRect(vct);
+            res = iat::integralTablLeftHandRect(vct);
 
         }else if(ui->radioButtonRightRect->isChecked())
         {
-            res = integralTablRightHandRect(vct);
+            res = iat::integralTablRightHandRect(vct);
         }else if(ui->radioButtonTrap->isChecked())
         {
-            res = integralTablTrapezoids(vct);
+            res = iat::integralTablTrapezoids(vct);
         }else if(ui->radioButtonsimpson->isChecked())
         {
-            res = integralTablSimpson(vct);
+            res = iat::integralTablSimpson(vct);
         }else
         {
-            res = integralTablPolLagr(vct, a, b);
+            res = iat::integralTablPolLagr(vct, a, b);
         }
         int prec = ui->spinBoxPrec->value();
         ui->lineEditResult->setText(QString::number(res, 'f', prec));

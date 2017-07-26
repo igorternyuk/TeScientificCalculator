@@ -1,6 +1,5 @@
 #include "formsquareequation.h"
 #include "ui_formsquareequation.h"
-#include <math.h>
 #include <vector>
 #include <complex>
 #include "matematica.h"
@@ -39,7 +38,7 @@ void FormSquareEquation::on_pushButtonCalculate_clicked()
     double b = ui->doubleSpinBoxB->value();
     double c = ui->doubleSpinBoxC->value();
     int prec = ui->spinBoxPrec->value();
-    std::vector<std::complex<double>> roots = solveSquareEquation(a, b, c);
+    std::vector<std::complex<double>> roots = iat::solveSquareEquation(a, b, c);
     if(!roots.empty())
     {
         if(roots[0].imag() != 0)

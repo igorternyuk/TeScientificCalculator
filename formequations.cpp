@@ -1,11 +1,14 @@
 #include "formequations.h"
 #include "ui_formequations.h"
-#include "parser.h"
+
+#include <QMessageBox>
+#include <stdexcept>
+
+#include "matematica.h"
+
 #ifdef DEBUG
 #include <QDebug>
 #endif
-#include <QMessageBox>
-#include <stdexcept>
 
 FormEquations::FormEquations(QWidget *parent) :
     QWidget(parent),
@@ -52,28 +55,28 @@ void FormEquations::on_pushButtonCalculate_clicked()
         if(ui->radioButtonBisectionMethod->isChecked())
         {
             std::string iterProcess;
-            res = solveEquationBisectionMethod(input,'X', a, b, eps, n, iterProcess);
+            res = iat::solveEquationBisectionMethod(input,'X', a, b, eps, n, iterProcess);
             ui->textEditIterProcess->clear();
             ui->textEditIterProcess->setText(QString::fromStdString(iterProcess));
         }
         else if(ui->radioButtonChordMethod->isChecked())
         {
             std::string iterProcess;
-            res = solveEquationChordsMethod(input,'X', a, b, eps, n, iterProcess);
+            res = iat::solveEquationChordsMethod(input,'X', a, b, eps, n, iterProcess);
             ui->textEditIterProcess->clear();
             ui->textEditIterProcess->setText(QString::fromStdString(iterProcess));
         }
         else if(ui->radioButtonTangentMethod->isChecked())
         {
             std::string iterProcess;
-            res = solveEquationTangentsMethod(input,'X', a, b, eps, n, iterProcess);
+            res = iat::solveEquationTangentsMethod(input,'X', a, b, eps, n, iterProcess);
             ui->textEditIterProcess->clear();
             ui->textEditIterProcess->setText(QString::fromStdString(iterProcess));
         }
         else if(ui->radioButtonCombinedMethod->isChecked())
         {
             std::string iterProcess;
-            res = solveEquationCombinedMethod(input,'X', a, b, eps, n, iterProcess);
+            res = iat::solveEquationCombinedMethod(input,'X', a, b, eps, n, iterProcess);
             ui->textEditIterProcess->clear();
             ui->textEditIterProcess->setText(QString::fromStdString(iterProcess));
         }
@@ -81,7 +84,7 @@ void FormEquations::on_pushButtonCalculate_clicked()
         {
             double lambda = ui->doubleSpinBoxLambda->value();
             std::string iterProcess;
-            res = solveEquationIterationMethod(input,'X', a, b, eps, lambda, n, iterProcess);
+            res = iat::solveEquationIterationMethod(input,'X', a, b, eps, lambda, n, iterProcess);
             ui->textEditIterProcess->clear();
             ui->textEditIterProcess->setText(QString::fromStdString(iterProcess));
         }

@@ -9,9 +9,7 @@
 #include <QFileDialog>
 #include <QDesktopWidget>
 #include <QDoubleSpinBox>
-#ifdef DEBUG
-#include <QDebug>
-#endif
+
 #include "parser.h"
 #include "matematica.h"
 #include "formequations.h"
@@ -25,6 +23,12 @@
 #include "formpartialderivatives.h"
 #include "formtabldiff.h"
 #include "formsystemofnonlinearequations.h"
+
+#ifdef DEBUG
+#include <QDebug>
+#endif
+
+using namespace iat;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),

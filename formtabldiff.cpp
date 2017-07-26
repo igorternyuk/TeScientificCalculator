@@ -4,10 +4,11 @@
 #include <QStringList>
 #include <QMessageBox>
 #include <vector>
-#include <math.h>
 #include <stdexcept>
 #include "doublespinboxdelegate.h"
 #include "matematica.h"
+
+using namespace iat;
 
 FormTablDiff::FormTablDiff(QWidget *parent) :
     QWidget(parent),

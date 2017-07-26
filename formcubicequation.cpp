@@ -7,6 +7,8 @@
 #include <stdexcept>
 #include <QMessageBox>
 
+using namespace iat;
+
 FormCubicEquation::FormCubicEquation(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::FormCubicEquation)

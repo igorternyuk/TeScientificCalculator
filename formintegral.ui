@@ -64,7 +64,11 @@
         </widget>
        </item>
        <item>
-        <widget class="QTextEdit" name="textEditIterProcess"/>
+        <widget class="QTextEdit" name="textEditIterProcess">
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>

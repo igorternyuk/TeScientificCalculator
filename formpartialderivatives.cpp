@@ -4,10 +4,13 @@
 #include <QMessageBox>
 #include <QStringList>
 #include <doublespinboxdelegate.h>
+#include "matematica.h"
+
 #ifdef DEBUG
 #include <QDebug>
 #endif
-#include "parser.h"
+
+using namespace iat;
 
 FormPartialDerivatives::FormPartialDerivatives(QWidget *parent) :
     QWidget(parent),

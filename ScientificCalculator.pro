@@ -27,7 +27,8 @@ SOURCES += main.cpp\
     formtablintegral.cpp \
     formpartialderivatives.cpp \
     formtabldiff.cpp \
-    formsystemofnonlinearequations.cpp
+    formsystemofnonlinearequations.cpp \
+    matrix.cpp
 
 HEADERS  += mainwindow.h \
     parser.h \
