@@ -20,6 +20,9 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+protected:
+    void keyPressEvent(QKeyEvent *event);
+
 private slots:
     void on_pushButton0_clicked();
     void on_pushButton1_clicked();
@@ -115,12 +118,9 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    QStandardItemModel *resTable;
-    QStandardItemModel *varTable;
-    double valueInMemory;
-
-protected:
-    void keyPressEvent(QKeyEvent *event);
+    QStandardItemModel *_pResTable;
+    QStandardItemModel *_pVarTable;
+    double _valueInMemory;
 };
 
 #endif // MAINWINDOW_H

@@ -35,17 +35,17 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    resTable = new QStandardItemModel(this);
-    resTable->setColumnCount(2);
-    ui->tableViewResults->setModel(resTable);
-    varTable = new QStandardItemModel(this);
-    ui->tableViewVariables->setModel(varTable);
+    _pResTable = new QStandardItemModel(this);
+    _pResTable->setColumnCount(2);
+    ui->tableViewResults->setModel(_pResTable);
+    _pVarTable = new QStandardItemModel(this);
+    ui->tableViewVariables->setModel(_pVarTable);
     ui->tableViewVariables->setItemDelegateForColumn(1, new DoubleSpinBoxDelegate(this));
-    varTable->setColumnCount(2);
+    _pVarTable->setColumnCount(2);
     ui->spinBox->setValue(6);
     ui->spinBox->setMaximum(16);
     ui->spinBox->setMinimum(1);
-    valueInMemory = 0.0;
+    _valueInMemory = 0.0;
     ui->lineEditInput->setFocus();
 }
 
@@ -59,9 +59,9 @@ void MainWindow::on_pushButtonCalculate_clicked()
     {        
         std::string input = ui->lineEditInput->text().toStdString().c_str();
         std::vector<std::pair<char, double>> vctVars;
-        for(int i = 0; i < varTable->rowCount(); ++i)
+        for(int i = 0; i < _pVarTable->rowCount(); ++i)
         {
-            std::pair<char, double> pTmp(getValueAt(varTable, i, 0).toStdString().at(0), getValueAt(varTable, i, 1).toDouble());
+            std::pair<char, double> pTmp(getValueAt(_pVarTable, i, 0).toStdString().at(0), getValueAt(_pVarTable, i, 1).toDouble());
             vctVars.push_back(pTmp);
         }
         std::string angleUnit;
@@ -74,8 +74,8 @@ void MainWindow::on_pushButtonCalculate_clicked()
         Parser prs(input, vctVars, angleUnit);
         auto resultOfParsing = prs.calculateExpression();
         //Если парсер кинул исключение то строку в таблицу результатов не добавляем
-        resTable->setRowCount(resTable->rowCount()+1);
-        appendTo(resTable, resultOfParsing);
+        _pResTable->setRowCount(_pResTable->rowCount()+1);
+        appendTo(_pResTable, resultOfParsing);
     }
     catch (std::exception &e)
     {
@@ -92,8 +92,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     if(key == Qt::Key_Return)
     {
          on_pushButtonCalculate_clicked();
-    }
-    if(key == Qt::Key_Escape)
+    } else if(key == Qt::Key_Escape)
     {
          close();
     }
@@ -217,15 +216,15 @@ void MainWindow::openFile()
         std::ifstream fi(fileName.toStdString());
         int row, col;
         fi >> row >> col;
-        resTable->setRowCount(row);
-        resTable->setColumnCount(col);
+        _pResTable->setRowCount(row);
+        _pResTable->setColumnCount(col);
         for(int i = 0; i < row; ++i)
         {
             for (int j = 0; j < col; ++j)
             {
               std::string item;
               fi >> item;
-              appendTo(resTable,QString::fromStdString(item));
+              appendTo(_pResTable,QString::fromStdString(item));
             }
         }
         fi.close();
@@ -239,11 +238,11 @@ void MainWindow::saveFile()
                 QDir::currentPath(),
                 QString::fromStdString("Текстовые документы (*.txt)"));
     std::ofstream fo(fileName.toStdString());
-    fo << resTable->rowCount() << " " << resTable->columnCount() << "\n";
-    for(int i = 0; i < resTable->rowCount(); ++i)
+    fo << _pResTable->rowCount() << " " << _pResTable->columnCount() << "\n";
+    for(int i = 0; i < _pResTable->rowCount(); ++i)
     {
-        fo << getValueAt(resTable, i,0).toStdString() <<
-              getValueAt(resTable, i,1).toStdString() << std::endl;
+        fo << getValueAt(_pResTable, i,0).toStdString() <<
+              getValueAt(_pResTable, i,1).toStdString() << std::endl;
     }
     fo.close();
 }
@@ -251,7 +250,7 @@ void MainWindow::saveFile()
 //*******************Models**********************
 void MainWindow::on_spinBoxVariables_valueChanged(int arg1)
 {
-    varTable->setRowCount(arg1);
+    _pVarTable->setRowCount(arg1);
 }
 QString MainWindow::getValueAt(QStandardItemModel *model, int i, int j) const
 {
@@ -290,8 +289,8 @@ void MainWindow::appendTo(QStandardItemModel *model, QString item) const
 }
 void MainWindow::clearCalculationsHistory()
 {
-   resTable->clear();
-   resTable->setColumnCount(2);
+   _pResTable->clear();
+   _pResTable->setColumnCount(2);
 }
 void MainWindow::insertOperatorName(std::string s)
 {
@@ -627,9 +626,9 @@ void MainWindow::on_pushButtonAbs_clicked()
 }
 void MainWindow::on_pushButtonAns_clicked()
 {
-    if(resTable->rowCount() > 0)
+    if(_pResTable->rowCount() > 0)
     {
-        QString tmp = getValueAt(resTable, resTable->rowCount() - 1, 1);
+        QString tmp = getValueAt(_pResTable, _pResTable->rowCount() - 1, 1);
         insertOperatorName(tmp.toStdString());
         ui->lineEditInput->setCursorPosition(ui->lineEditInput->cursorPosition() + 1);
     }
@@ -654,36 +653,36 @@ void MainWindow::on_pushButtonExit_clicked()
 }
 void MainWindow::on_pushButtonMemPlus_clicked()
 {
-    if(resTable->rowCount() > 0)
-          valueInMemory += getValueAt(resTable, resTable->rowCount() - 1, 1).toDouble();
+    if(_pResTable->rowCount() > 0)
+          _valueInMemory += getValueAt(_pResTable, _pResTable->rowCount() - 1, 1).toDouble();
 }
 void MainWindow::on_pushButtonMeminus_clicked()
 {
-    if(resTable->rowCount() > 0)
-          valueInMemory -= getValueAt(resTable, resTable->rowCount() - 1, 1).toDouble();
+    if(_pResTable->rowCount() > 0)
+          _valueInMemory -= getValueAt(_pResTable, _pResTable->rowCount() - 1, 1).toDouble();
 }
 void MainWindow::on_pushButtonMemMultiplicate_clicked()
 {
-    if(resTable->rowCount() > 0)
-          valueInMemory *= getValueAt(resTable, resTable->rowCount() - 1, 1).toDouble();
+    if(_pResTable->rowCount() > 0)
+          _valueInMemory *= getValueAt(_pResTable, _pResTable->rowCount() - 1, 1).toDouble();
 }
 void MainWindow::on_pushButtonMemDivide_clicked()
 {
-    if(resTable->rowCount() > 0 && getValueAt(resTable, resTable->rowCount() - 1, 1).toDouble() != 0)
-          valueInMemory /= getValueAt(resTable, resTable->rowCount() - 1, 1).toDouble();
+    if(_pResTable->rowCount() > 0 && getValueAt(_pResTable, _pResTable->rowCount() - 1, 1).toDouble() != 0)
+          _valueInMemory /= getValueAt(_pResTable, _pResTable->rowCount() - 1, 1).toDouble();
 }
 void MainWindow::on_pushButtonLMemRes_clicked()
 {
-    if(resTable->rowCount() > 0)
+    if(_pResTable->rowCount() > 0)
     {
-          QString memVal = QString::number(valueInMemory, 'f', ui->spinBox->value());
+          QString memVal = QString::number(_valueInMemory, 'f', ui->spinBox->value());
           insertOperatorName(memVal.toStdString());
           ui->lineEditInput->setCursorPosition(ui->lineEditInput->cursorPosition() + 1);
     }
 }
 void MainWindow::on_MemClear_clicked()
 {
-    valueInMemory = 0.0;
+    _valueInMemory = 0.0;
 }
 
 void MainWindow::on_action_triggered()
