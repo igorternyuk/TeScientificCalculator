@@ -1,8 +1,11 @@
 #include "formsquareequation.h"
 #include "ui_formsquareequation.h"
+
+#include "matematica.h"
+
 #include <vector>
 #include <complex>
-#include "matematica.h"
+#include <QCloseEvent>
 
 FormSquareEquation::FormSquareEquation(QWidget *parent) :
     QWidget(parent),
@@ -55,18 +58,27 @@ void FormSquareEquation::on_pushButtonCalculate_clicked()
 
 void FormSquareEquation::on_pushButtonClose_clicked()
 {
-    close();
+    this->hide();
 }
 
-void FormSquareEquation::keyPressEvent(QKeyEvent *event)
+void FormSquareEquation::keyReleaseEvent(QKeyEvent *event)
 {
     int key = event->key();
     if(key == Qt::Key_Return)
     {
         on_pushButtonCalculate_clicked();
     }
-    if(key == Qt::Key_Escape)
+    else if(key == Qt::Key_Escape)
     {
-        close();
+        this->hide();
     }
+    else
+    {
+        QWidget::keyReleaseEvent(event);
+    }
+}
+
+void FormSquareEquation::closeEvent(QCloseEvent *)
+{
+    this->hide();
 }

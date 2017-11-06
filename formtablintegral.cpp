@@ -1,10 +1,13 @@
 #include "formtablintegral.h"
 #include "ui_formtablintegral.h"
+
+#include "doublespinboxdelegate.h"
+#include "matematica.h"
+
 #include <QStandardItemModel>
 #include <QMessageBox>
 #include <QStringList>
-#include "doublespinboxdelegate.h"
-#include "matematica.h"
+#include <QCloseEvent>
 
 FormTablIntegral::FormTablIntegral(QWidget *parent) :
     QWidget(parent),
@@ -82,8 +85,9 @@ void FormTablIntegral::on_pushButtonCalculate_clicked()
 }
 void FormTablIntegral::on_pushButtonClose_clicked()
 {
-    close();
+    this->hide();
 }
+
 void FormTablIntegral::on_spinBoxNumberOfPoints_valueChanged(int arg1)
 {
     tabIntegrand->setRowCount(arg1);
@@ -93,15 +97,24 @@ double FormTablIntegral::getValueAt(QStandardItemModel *model, int i, int j) con
     if(!model->item(i, j)) return 0.0;
     else return model->item(i, j)->text().toDouble();
 }
-void FormTablIntegral::keyPressEvent(QKeyEvent *event)
+void FormTablIntegral::keyReleaseEvent(QKeyEvent *event)
 {
     int key = event->key();
     if(key == Qt::Key_Return)
     {
         on_pushButtonCalculate_clicked();
     }
-    if(key == Qt::Key_Escape)
+    else if(key == Qt::Key_Escape)
     {
-        close();
+        this->hide();
     }
+    else
+    {
+        QWidget::keyReleaseEvent(event);
+    }
+}
+
+void FormTablIntegral::closeEvent(QCloseEvent *)
+{
+    this->hide();
 }

@@ -3,6 +3,8 @@
 #include "formintegral.h"
 #include "ui_formintegral.h"
 #include "matematica.h"
+#include <QCloseEvent>
+
 #ifdef DEBUG
 #include <QDebug>
 #endif
@@ -81,15 +83,29 @@ void FormIntegral::on_pushButtonCalculate_clicked()
          return;
     }
 }
-void FormIntegral::keyPressEvent(QKeyEvent *event)
+void FormIntegral::keyReleaseEvent(QKeyEvent *event)
 {
     int key = event->key();
     if(key == Qt::Key_Return)
     {
         on_pushButtonCalculate_clicked();
     }
-    if(key == Qt::Key_Escape)
+    else if(key == Qt::Key_Escape)
     {
-        close();
+        this->hide();
     }
+    else
+    {
+        QWidget::keyReleaseEvent(event);
+    }
+}
+
+void FormIntegral::closeEvent(QCloseEvent*)
+{
+    this->hide();
+}
+
+void FormIntegral::on_pushButtonClose_clicked()
+{
+    this->hide();
 }

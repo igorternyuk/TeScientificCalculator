@@ -1,12 +1,15 @@
 #include "formtabldiff.h"
 #include "ui_formtabldiff.h"
+
+#include "doublespinboxdelegate.h"
+#include "matematica.h"
+
 #include <QStandardItemModel>
 #include <QStringList>
 #include <QMessageBox>
 #include <vector>
 #include <stdexcept>
-#include "doublespinboxdelegate.h"
-#include "matematica.h"
+#include <QCloseEvent>
 
 using namespace iat;
 
@@ -76,22 +79,31 @@ void FormTablDiff::on_pushButtonCalculate_clicked()
 }
 void FormTablDiff::on_pushButtonClose_clicked()
 {
-    close();
+    this->hide();
 }
 double FormTablDiff::getTableItemValue(QStandardItemModel *model, int i, int j) const
 {
     if(!model->item(i, j)) return 0.0;
     else return model->item(i, j)->text().toDouble();
 }
-void FormTablDiff::keyPressEvent(QKeyEvent *event)
+void FormTablDiff::keyReleaseEvent(QKeyEvent *event)
 {
     int key = event->key();
     if(key == Qt::Key_Return)
     {
         on_pushButtonCalculate_clicked();
     }
-    if(key == Qt::Key_Escape)
+    else if(key == Qt::Key_Escape)
     {
-        close();
+        this->hide();
     }
+    else
+    {
+        QWidget::keyReleaseEvent(event);
+    }
+}
+
+void FormTablDiff::closeEvent(QCloseEvent*)
+{
+    this->hide();
 }

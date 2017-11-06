@@ -8,6 +8,8 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
+CONFIG += c++1z
+
 TARGET = ScientificCalculator
 TEMPLATE = app
 
@@ -62,5 +64,3 @@ RC_ICONS = icono.ico
 
 RESOURCES += \
     recursos.qrc
-
-QMAKE_CXXFLAGS += -std=c++14

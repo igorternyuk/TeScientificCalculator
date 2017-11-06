@@ -35,22 +35,33 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    _pResTable = new QStandardItemModel(this);
-    _pResTable->setColumnCount(2);
-    ui->tableViewResults->setModel(_pResTable);
-    _pVarTable = new QStandardItemModel(this);
-    ui->tableViewVariables->setModel(_pVarTable);
+    pResTable_ = new QStandardItemModel(this);
+    pResTable_->setColumnCount(2);
+    ui->tableViewResults->setModel(pResTable_);
+    pVarTable_ = new QStandardItemModel(this);
+    ui->tableViewVariables->setModel(pVarTable_);
     ui->tableViewVariables->setItemDelegateForColumn(1, new DoubleSpinBoxDelegate(this));
-    _pVarTable->setColumnCount(2);
+    pVarTable_->setColumnCount(2);
     ui->spinBox->setValue(6);
     ui->spinBox->setMaximum(16);
     ui->spinBox->setMinimum(1);
-    _valueInMemory = 0.0;
+    valueInMemory_ = 0.0;
     ui->lineEditInput->setFocus();
+    createChildren();
 }
 
 MainWindow::~MainWindow()
 {
+    delete frmSqEq_;
+    delete frmCbEq_;
+    delete frmEq_;
+    delete frmConv_;
+    delete frmIntegral_;
+    delete frmTabIntegral_;
+    delete frmDer_;
+    delete frmPrtDer_;
+    delete frmTblDiff_;
+    delete frmSyst_;
     delete ui;
 }
 void MainWindow::on_pushButtonCalculate_clicked()
@@ -59,9 +70,9 @@ void MainWindow::on_pushButtonCalculate_clicked()
     {        
         std::string input = ui->lineEditInput->text().toStdString().c_str();
         std::vector<std::pair<char, double>> vctVars;
-        for(int i = 0; i < _pVarTable->rowCount(); ++i)
+        for(int i = 0; i < pVarTable_->rowCount(); ++i)
         {
-            std::pair<char, double> pTmp(getValueAt(_pVarTable, i, 0).toStdString().at(0), getValueAt(_pVarTable, i, 1).toDouble());
+            std::pair<char, double> pTmp(getValueAt(pVarTable_, i, 0).toStdString().at(0), getValueAt(pVarTable_, i, 1).toDouble());
             vctVars.push_back(pTmp);
         }
         std::string angleUnit;
@@ -74,8 +85,8 @@ void MainWindow::on_pushButtonCalculate_clicked()
         Parser prs(input, vctVars, angleUnit);
         auto resultOfParsing = prs.calculateExpression();
         //Если парсер кинул исключение то строку в таблицу результатов не добавляем
-        _pResTable->setRowCount(_pResTable->rowCount()+1);
-        appendTo(_pResTable, resultOfParsing);
+        pResTable_->setRowCount(pResTable_->rowCount()+1);
+        appendTo(pResTable_, resultOfParsing);
     }
     catch (std::exception &e)
     {
@@ -98,7 +109,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     }
 }
 //*******************Actions**********************
-//Уравнения
+
 void MainWindow::on_saveResults_triggered()
 {
     saveFile();
@@ -113,93 +124,43 @@ void MainWindow::on_clearCalcHistory_triggered()
 }
 void MainWindow::on_squareEquation_triggered()
 {
-    FormSquareEquation *frmSqEq = new FormSquareEquation();
-    QRect myScreenGeometry = QApplication::desktop()->geometry() ;
-    int x = (myScreenGeometry.width() - frmSqEq->width()) / 2;
-    int y = (myScreenGeometry.height() - frmSqEq->height()) / 2;
-    frmSqEq->move(x, y);
-    frmSqEq->show();
+    frmSqEq_->show();
 }
 void MainWindow::on_cubicEquation_triggered()
 {
-    FormCubicEquation *frmCbEq = new FormCubicEquation();
-    QRect myScreenGeometry = QApplication::desktop()->geometry() ;
-    int x = (myScreenGeometry.width() - frmCbEq->width()) / 2;
-    int y = (myScreenGeometry.height() - frmCbEq->height()) / 2;
-    frmCbEq->move(x, y);
-    frmCbEq->show();
+    frmCbEq_->show();
 }
 void MainWindow::on_solveEquation_triggered()
 {
-    FormEquations *frmEq = new FormEquations();
-    QRect myScreenGeometry = QApplication::desktop()->geometry() ;
-    int x = (myScreenGeometry.width() - frmEq->width()) / 2;
-    int y = (myScreenGeometry.height() - frmEq->height()) / 2;
-    frmEq->move(x, y);
-    frmEq->show();
+    frmEq_->show();
 }
 void MainWindow::on_actionConverter_triggered()
 {
-    FormConverter *frmConv = new FormConverter();
-    QRect myScreenGeometry = QApplication::desktop()->geometry() ;
-    int x = (myScreenGeometry.width() - frmConv->width()) / 2;
-    int y = (myScreenGeometry.height() - frmConv->height()) / 2;
-    frmConv->move(x, y);
-    frmConv->show();
+    frmConv_->show();
 }
 void MainWindow::on_analiticIntegral_triggered()
 {
-    FormIntegral *frmIntegral = new FormIntegral();
-    QRect myScreenGeometry = QApplication::desktop()->geometry() ;
-    int x = (myScreenGeometry.width() - frmIntegral->width()) / 2;
-    int y = (myScreenGeometry.height() - frmIntegral->height()) / 2;
-    frmIntegral->move(x, y);
-    frmIntegral->show();
+    frmIntegral_->show();
 }
 void MainWindow::on_tablIntegral_triggered()
 {
-    FormTablIntegral *frmTabIntegral = new FormTablIntegral();
-    QRect myScreenGeometry = QApplication::desktop()->geometry() ;
-    int x = (myScreenGeometry.width() - frmTabIntegral->width()) / 2;
-    int y = (myScreenGeometry.height() - frmTabIntegral->height()) / 2;
-    frmTabIntegral->move(x, y);
-    frmTabIntegral->show();
+    frmTabIntegral_->show();
 }
 void MainWindow::on_derivativeFx_triggered()
 {
-    FormDerivative *frmDer = new FormDerivative();
-    QRect myScreenGeometry = QApplication::desktop()->geometry() ;
-    int x = (myScreenGeometry.width() - frmDer->width()) / 2;
-    int y = (myScreenGeometry.height() - frmDer->height()) / 2;
-    frmDer->move(x, y);
-    frmDer->show();
+    frmDer_->show();
 }
 void MainWindow::on_partialDerivativesFxyz_triggered()
 {
-    FormPartialDerivatives *frmPrtDer = new FormPartialDerivatives();
-    QRect myScreenGeometry = QApplication::desktop()->geometry() ;
-    int x = (myScreenGeometry.width() - frmPrtDer->width()) / 2;
-    int y = (myScreenGeometry.height() - frmPrtDer->height()) / 2;
-    frmPrtDer->move(x, y);
-    frmPrtDer->show();
+    frmPrtDer_->show();
 }
 void MainWindow::on_diffTablfunc_triggered()
 {
-    FormTablDiff *frmTblDiff = new FormTablDiff();
-    QRect myScreenGeometry = QApplication::desktop()->geometry() ;
-    int x = (myScreenGeometry.width() - frmTblDiff->width()) / 2;
-    int y = (myScreenGeometry.height() - frmTblDiff->height()) / 2;
-    frmTblDiff->move(x, y);
-    frmTblDiff->show();
+    frmTblDiff_->show();
 }
 void MainWindow::on_systNonLinearEquations_triggered()
 {
-    FormSystemOfNonLinearEquations *frmSyst = new FormSystemOfNonLinearEquations();
-    QRect myScreenGeometry = QApplication::desktop()->geometry() ;
-    int x = (myScreenGeometry.width() -frmSyst->width()) / 2;
-    int y = (myScreenGeometry.height() - frmSyst->height()) / 2;
-    frmSyst->move(x, y);
-    frmSyst->show();
+    frmSyst_->show();
 }
 void MainWindow::openFile()
 {
@@ -216,15 +177,15 @@ void MainWindow::openFile()
         std::ifstream fi(fileName.toStdString());
         int row, col;
         fi >> row >> col;
-        _pResTable->setRowCount(row);
-        _pResTable->setColumnCount(col);
+        pResTable_->setRowCount(row);
+        pResTable_->setColumnCount(col);
         for(int i = 0; i < row; ++i)
         {
             for (int j = 0; j < col; ++j)
             {
               std::string item;
               fi >> item;
-              appendTo(_pResTable,QString::fromStdString(item));
+              appendTo(pResTable_,QString::fromStdString(item));
             }
         }
         fi.close();
@@ -238,11 +199,11 @@ void MainWindow::saveFile()
                 QDir::currentPath(),
                 QString::fromStdString("Текстовые документы (*.txt)"));
     std::ofstream fo(fileName.toStdString());
-    fo << _pResTable->rowCount() << " " << _pResTable->columnCount() << "\n";
-    for(int i = 0; i < _pResTable->rowCount(); ++i)
+    fo << pResTable_->rowCount() << " " << pResTable_->columnCount() << "\n";
+    for(int i = 0; i < pResTable_->rowCount(); ++i)
     {
-        fo << getValueAt(_pResTable, i,0).toStdString() <<
-              getValueAt(_pResTable, i,1).toStdString() << std::endl;
+        fo << getValueAt(pResTable_, i,0).toStdString() <<
+              getValueAt(pResTable_, i,1).toStdString() << std::endl;
     }
     fo.close();
 }
@@ -250,7 +211,7 @@ void MainWindow::saveFile()
 //*******************Models**********************
 void MainWindow::on_spinBoxVariables_valueChanged(int arg1)
 {
-    _pVarTable->setRowCount(arg1);
+    pVarTable_->setRowCount(arg1);
 }
 QString MainWindow::getValueAt(QStandardItemModel *model, int i, int j) const
 {
@@ -289,8 +250,8 @@ void MainWindow::appendTo(QStandardItemModel *model, QString item) const
 }
 void MainWindow::clearCalculationsHistory()
 {
-   _pResTable->clear();
-   _pResTable->setColumnCount(2);
+   pResTable_->clear();
+   pResTable_->setColumnCount(2);
 }
 void MainWindow::insertOperatorName(std::string s)
 {
@@ -626,9 +587,9 @@ void MainWindow::on_pushButtonAbs_clicked()
 }
 void MainWindow::on_pushButtonAns_clicked()
 {
-    if(_pResTable->rowCount() > 0)
+    if(pResTable_->rowCount() > 0)
     {
-        QString tmp = getValueAt(_pResTable, _pResTable->rowCount() - 1, 1);
+        QString tmp = getValueAt(pResTable_, pResTable_->rowCount() - 1, 1);
         insertOperatorName(tmp.toStdString());
         ui->lineEditInput->setCursorPosition(ui->lineEditInput->cursorPosition() + 1);
     }
@@ -653,36 +614,36 @@ void MainWindow::on_pushButtonExit_clicked()
 }
 void MainWindow::on_pushButtonMemPlus_clicked()
 {
-    if(_pResTable->rowCount() > 0)
-          _valueInMemory += getValueAt(_pResTable, _pResTable->rowCount() - 1, 1).toDouble();
+    if(pResTable_->rowCount() > 0)
+          valueInMemory_ += getValueAt(pResTable_, pResTable_->rowCount() - 1, 1).toDouble();
 }
 void MainWindow::on_pushButtonMeminus_clicked()
 {
-    if(_pResTable->rowCount() > 0)
-          _valueInMemory -= getValueAt(_pResTable, _pResTable->rowCount() - 1, 1).toDouble();
+    if(pResTable_->rowCount() > 0)
+          valueInMemory_ -= getValueAt(pResTable_, pResTable_->rowCount() - 1, 1).toDouble();
 }
 void MainWindow::on_pushButtonMemMultiplicate_clicked()
 {
-    if(_pResTable->rowCount() > 0)
-          _valueInMemory *= getValueAt(_pResTable, _pResTable->rowCount() - 1, 1).toDouble();
+    if(pResTable_->rowCount() > 0)
+          valueInMemory_ *= getValueAt(pResTable_, pResTable_->rowCount() - 1, 1).toDouble();
 }
 void MainWindow::on_pushButtonMemDivide_clicked()
 {
-    if(_pResTable->rowCount() > 0 && getValueAt(_pResTable, _pResTable->rowCount() - 1, 1).toDouble() != 0)
-          _valueInMemory /= getValueAt(_pResTable, _pResTable->rowCount() - 1, 1).toDouble();
+    if(pResTable_->rowCount() > 0 && getValueAt(pResTable_, pResTable_->rowCount() - 1, 1).toDouble() != 0)
+          valueInMemory_ /= getValueAt(pResTable_, pResTable_->rowCount() - 1, 1).toDouble();
 }
 void MainWindow::on_pushButtonLMemRes_clicked()
 {
-    if(_pResTable->rowCount() > 0)
+    if(pResTable_->rowCount() > 0)
     {
-          QString memVal = QString::number(_valueInMemory, 'f', ui->spinBox->value());
+          QString memVal = QString::number(valueInMemory_, 'f', ui->spinBox->value());
           insertOperatorName(memVal.toStdString());
           ui->lineEditInput->setCursorPosition(ui->lineEditInput->cursorPosition() + 1);
     }
 }
 void MainWindow::on_MemClear_clicked()
 {
-    _valueInMemory = 0.0;
+    valueInMemory_ = 0.0;
 }
 
 void MainWindow::on_action_triggered()
@@ -706,4 +667,46 @@ void MainWindow::on_tableViewResults_doubleClicked(const QModelIndex &index)
 
     QString oldText = ui->lineEditInput->text();
     ui->lineEditInput->setText(oldText + val);
+}
+
+void MainWindow::createChildren()
+{
+    frmSqEq_ = new FormSquareEquation();
+    centralizeWidget(frmSqEq_);
+
+    frmCbEq_ = new FormCubicEquation();
+    centralizeWidget(frmCbEq_);
+
+    frmEq_ = new FormEquations();
+    centralizeWidget(frmEq_);
+
+    frmConv_ = new FormConverter();
+    centralizeWidget(frmConv_);
+
+    frmIntegral_ = new FormIntegral();
+    centralizeWidget(frmIntegral_);
+
+    frmTabIntegral_ = new FormTablIntegral();
+    centralizeWidget(frmTabIntegral_);
+
+    frmDer_ = new FormDerivative();
+    centralizeWidget(frmDer_);
+
+    frmPrtDer_ = new FormPartialDerivatives();
+    centralizeWidget(frmPrtDer_);
+
+    frmTblDiff_ = new FormTablDiff();
+    centralizeWidget(frmTblDiff_);
+
+    frmSyst_ = new FormSystemOfNonLinearEquations();
+    centralizeWidget(frmSyst_);
+}
+
+void MainWindow::centralizeWidget(QWidget *widget)
+{
+    QRect myScreenGeometry = QApplication::desktop()->geometry() ;
+    int x = (myScreenGeometry.width() - widget->width()) / 2;
+    int y = (myScreenGeometry.height() - widget->height()) / 2;
+    widget->move(x, y);
+    widget->hide();
 }

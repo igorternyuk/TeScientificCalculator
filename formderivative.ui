@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>248</width>
+    <width>263</width>
     <height>292</height>
    </rect>
   </property>
@@ -158,7 +158,7 @@
      <item row="8" column="1">
       <widget class="QPushButton" name="pushButtonExit">
        <property name="text">
-        <string>Выйти</string>
+        <string>Закрыть</string>
        </property>
       </widget>
      </item>

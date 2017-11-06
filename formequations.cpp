@@ -1,10 +1,11 @@
 #include "formequations.h"
 #include "ui_formequations.h"
 
-#include <QMessageBox>
-#include <stdexcept>
-
 #include "matematica.h"
+
+#include <QMessageBox>
+#include <QCloseEvent>
+#include <stdexcept>
 
 #ifdef DEBUG
 #include <QDebug>
@@ -107,15 +108,29 @@ void FormEquations::on_pushButtonCalculate_clicked()
          return;
     }
 }
-void FormEquations::keyPressEvent(QKeyEvent *event)
+void FormEquations::keyReleaseEvent(QKeyEvent *event)
 {
     int key = event->key();
     if(key == Qt::Key_Return)
     {
         on_pushButtonCalculate_clicked();
     }
-    if(key == Qt::Key_Escape)
+    else if(key == Qt::Key_Escape)
     {
-        close();
+        this->hide();
     }
+    else
+    {
+        QWidget::keyReleaseEvent(event);
+    }
+}
+
+void FormEquations::closeEvent(QCloseEvent *)
+{
+    this->hide();
+}
+
+void FormEquations::on_pushButton_clicked()
+{
+    this->hide();
 }

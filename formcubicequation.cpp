@@ -6,6 +6,7 @@
 #include <math.h>
 #include <stdexcept>
 #include <QMessageBox>
+#include <QCloseEvent>
 
 using namespace iat;
 
@@ -78,7 +79,7 @@ void FormCubicEquation::on_pushButtonCalculate_clicked()
         q.exec();
     }
 }
-void FormCubicEquation::keyPressEvent(QKeyEvent *event)
+void FormCubicEquation::keyReleaseEvent(QKeyEvent *event)
 {
     int key = event->key();
     if(key == Qt::Key_Return)
@@ -87,6 +88,20 @@ void FormCubicEquation::keyPressEvent(QKeyEvent *event)
     }
     if(key == Qt::Key_Escape)
     {
-         close();
+         this->hide();
     }
+    else
+    {
+        QWidget::keyReleaseEvent(event);
+    }
+}
+
+void FormCubicEquation::closeEvent(QCloseEvent *)
+{
+    this->hide();
+}
+
+void FormCubicEquation::on_pushButtonExit_clicked()
+{
+    this->hide();
 }

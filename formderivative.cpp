@@ -1,12 +1,12 @@
 #include "formderivative.h"
 #include "ui_formderivative.h"
+#include "parser.h"
+#include "matematica.h"
 #include <QMessageBox>
+#include <QCloseEvent>
 #ifdef DEBUG
 #include <QDebug>
 #endif
-
-#include "parser.h"
-#include "matematica.h"
 
 using namespace iat;
 
@@ -57,20 +57,29 @@ void FormDerivative::on_pushButtonCalculate_clicked()
          return;
     }
 }
-void FormDerivative::keyPressEvent(QKeyEvent *event)
+void FormDerivative::keyReleaseEvent(QKeyEvent *event)
 {
     int key = event->key();
     if(key == Qt::Key_Return)
     {
          on_pushButtonCalculate_clicked();
     }
-    if(key == Qt::Key_Escape)
+    else if(key == Qt::Key_Escape)
     {
-         close();
+         this->hide();
     }
+    else
+    {
+        QWidget::keyReleaseEvent(event);
+    }
+}
+
+void FormDerivative::closeEvent(QCloseEvent*)
+{
+    this->hide();
 }
 
 void FormDerivative::on_pushButtonExit_clicked()
 {
-    close();
+    this->hide();
 }

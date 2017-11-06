@@ -180,7 +180,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>Выйти</string>
+      <string>Закрыть</string>
      </property>
     </widget>
     <widget class="QLineEdit" name="lineEditOutput">

@@ -8,8 +8,20 @@
 #include <QStandardItemModel>
 
 class QStandardItemModel;
-namespace Ui {
-class MainWindow;
+class FormEquations;
+class FormDerivative;
+class FormIntegral;
+class FormConverter;
+class FormSquareEquation;
+class FormCubicEquation;
+class FormTablIntegral;
+class FormPartialDerivatives;
+class FormTablDiff;
+class FormSystemOfNonLinearEquations;
+
+namespace Ui
+{
+    class MainWindow;
 }
 
 class MainWindow : public QMainWindow
@@ -118,9 +130,21 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    QStandardItemModel *_pResTable;
-    QStandardItemModel *_pVarTable;
-    double _valueInMemory;
+    QStandardItemModel *pResTable_;
+    QStandardItemModel *pVarTable_;
+    double valueInMemory_;
+    FormSquareEquation *frmSqEq_;
+    FormCubicEquation *frmCbEq_;
+    FormEquations *frmEq_;
+    FormConverter *frmConv_;
+    FormIntegral *frmIntegral_;
+    FormTablIntegral *frmTabIntegral_;
+    FormDerivative *frmDer_;
+    FormPartialDerivatives *frmPrtDer_;
+    FormTablDiff *frmTblDiff_;
+    FormSystemOfNonLinearEquations *frmSyst_;
+    void createChildren();
+    void centralizeWidget(QWidget * widget);
 };
 
 #endif // MAINWINDOW_H

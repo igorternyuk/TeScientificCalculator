@@ -7,8 +7,9 @@
 #include <Qt>
 #include <vector>
 
-namespace Ui {
-class FormCubicEquation;
+namespace Ui
+{
+    class FormCubicEquation;
 }
 
 class FormCubicEquation : public QWidget
@@ -16,13 +17,18 @@ class FormCubicEquation : public QWidget
     Q_OBJECT
 
 public:
-    explicit FormCubicEquation(QWidget *parent = 0);
+    explicit FormCubicEquation(QWidget *parent = nullptr);
     ~FormCubicEquation();
+
+
+protected:
+    void keyReleaseEvent(QKeyEvent *event) override;
+    void closeEvent(QCloseEvent*) override;
 
 private slots:
     void on_pushButtonCalculate_clicked();
-protected:
-    void keyPressEvent(QKeyEvent *event);
+    void on_pushButtonExit_clicked();
+
 private:
     Ui::FormCubicEquation *ui;
     std::vector<QDoubleSpinBox*> dspbx;

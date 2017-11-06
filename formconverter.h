@@ -7,8 +7,9 @@
 #include <QDoubleSpinBox>
 #include <Qt>
 
-namespace Ui {
-class FormConverter;
+namespace Ui
+{
+    class FormConverter;
 }
 
 class FormConverter : public QWidget
@@ -16,8 +17,13 @@ class FormConverter : public QWidget
     Q_OBJECT
 
 public:
-    explicit FormConverter(QWidget *parent = 0);
+    explicit FormConverter(QWidget *parent = nullptr);
     ~FormConverter();
+
+protected:
+    void closeEvent(QCloseEvent*) override;
+    void keyReleaseEvent(QKeyEvent *event);
+    std::vector<QDoubleSpinBox*> dspbx;
 
 private slots:
     void on_pushButtonConvert_clicked();
@@ -34,9 +40,6 @@ private slots:
     void on_pushButtonMassConvert_clicked();
     void on_pushButtonPressureClose_clicked();
     void on_pushButtonMassClose_clicked();
-protected:
-    void keyPressEvent(QKeyEvent *event);
-    std::vector<QDoubleSpinBox*> dspbx;
 
 private:
     Ui::FormConverter *ui;

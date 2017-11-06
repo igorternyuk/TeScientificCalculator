@@ -4,18 +4,24 @@
 #include <QWidget>
 #include <QKeyEvent>
 #include <Qt>
+
 namespace Ui
 {
-class FormSystemOfNonLinearEquations;
+    class FormSystemOfNonLinearEquations;
 }
+
 class QStandardItemModel;
 class FormSystemOfNonLinearEquations : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit FormSystemOfNonLinearEquations(QWidget *parent = 0);
+    explicit FormSystemOfNonLinearEquations(QWidget *parent = nullptr);
     ~FormSystemOfNonLinearEquations();
+
+protected:
+    void keyReleaseEvent(QKeyEvent *event) override;
+    void closeEvent(QCloseEvent*) override;
 
 private slots:
     void on_pushButtonCalculate_clicked();
@@ -23,9 +29,6 @@ private slots:
     void on_spinBoxNumberOfEquations_valueChanged(int arg1);
     QString getValueAt(QStandardItemModel *model, int i, int j) const;
     void appendTo(QStandardItemModel *model, char var, double value) const;
-
-protected:
-    void keyPressEvent(QKeyEvent *event);
 
 private:
     Ui::FormSystemOfNonLinearEquations *ui;

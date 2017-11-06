@@ -6,8 +6,9 @@
 #include <Qt>
 #include <QDoubleSpinBox>
 
-namespace Ui {
-class FormIntegral;
+namespace Ui
+{
+    class FormIntegral;
 }
 
 class FormIntegral : public QWidget
@@ -15,13 +16,16 @@ class FormIntegral : public QWidget
     Q_OBJECT
 
 public:
-    explicit FormIntegral(QWidget *parent = 0);
+    explicit FormIntegral(QWidget *parent = nullptr);
     ~FormIntegral();
 
 private slots:
     void on_pushButtonCalculate_clicked();
+    void on_pushButtonClose_clicked();
+
 protected:
-    void keyPressEvent(QKeyEvent *event);
+    void keyReleaseEvent(QKeyEvent *event) override;
+    void closeEvent(QCloseEvent*) override;
 
 private:
     Ui::FormIntegral *ui;

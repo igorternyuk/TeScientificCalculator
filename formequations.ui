@@ -173,7 +173,7 @@
       <item>
        <widget class="QPushButton" name="pushButton">
         <property name="text">
-         <string>Выйти</string>
+         <string>Закрыть</string>
         </property>
        </widget>
       </item>

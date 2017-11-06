@@ -1,10 +1,13 @@
 #include "formpartialderivatives.h"
 #include "ui_formpartialderivatives.h"
+
+#include "matematica.h"
+
 #include <QStandardItemModel>
 #include <QMessageBox>
 #include <QStringList>
+#include <QCloseEvent>
 #include <doublespinboxdelegate.h>
-#include "matematica.h"
 
 #ifdef DEBUG
 #include <QDebug>
@@ -79,8 +82,9 @@ void FormPartialDerivatives::on_pushButtonCalculate_clicked()
 }
 void FormPartialDerivatives::on_pushButtonClose_clicked()
 {
-    close();
+    this->hide();
 }
+
 QString FormPartialDerivatives::getValueAt(QStandardItemModel *model, int i, int j) const
 {
     if(!model->item(i, j)) return QString::fromStdString(" ");
@@ -104,15 +108,24 @@ void FormPartialDerivatives::on_spinBox_valueChanged(int arg1)
     mArgValues->setRowCount(arg1);
     mPartDerivatives->setRowCount(arg1);
 }
-void FormPartialDerivatives::keyPressEvent(QKeyEvent *event)
+void FormPartialDerivatives::keyReleaseEvent(QKeyEvent *event)
 {
     int key = event->key();
     if(key == Qt::Key_Return)
     {
         on_pushButtonCalculate_clicked();
     }
-    if(key == Qt::Key_Escape)
+    else if(key == Qt::Key_Escape)
     {
-        close();
+        this->hide();
     }
+    else
+    {
+        QWidget::keyReleaseEvent(event);
+    }
+}
+
+void FormPartialDerivatives::closeEvent(QCloseEvent*)
+{
+    this->hide();
 }

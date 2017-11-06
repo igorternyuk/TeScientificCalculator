@@ -263,7 +263,7 @@
        <item row="0" column="1">
         <widget class="QPushButton" name="pushButtonClose">
          <property name="text">
-          <string>Выйти</string>
+          <string>Закрыть</string>
          </property>
         </widget>
        </item>

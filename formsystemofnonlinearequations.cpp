@@ -1,13 +1,16 @@
 #include "formsystemofnonlinearequations.h"
 #include "ui_formsystemofnonlinearequations.h"
+
+#include "matematica.h"
+#include "doublespinboxdelegate.h"
+
 #include <QStandardItemModel>
 #include <QMessageBox>
 #include <stdexcept>
 #include <vector>
 #include <QStringList>
-#include "matematica.h"
-#include "doublespinboxdelegate.h"
 #include <fstream>
+#include <QCloseEvent>
 
 #ifdef DEBUG
 #include <QDebug>
@@ -99,21 +102,31 @@ void FormSystemOfNonLinearEquations::on_pushButtonCalculate_clicked()
          return;
     }
 }
-void FormSystemOfNonLinearEquations::keyPressEvent(QKeyEvent *event)
+void FormSystemOfNonLinearEquations::keyReleaseEvent(QKeyEvent *event)
 {
     int key = event->key();
     if(key == Qt::Key_Return)
     {
         on_pushButtonCalculate_clicked();
     }
-    if(key == Qt::Key_Escape)
+    else if(key == Qt::Key_Escape)
     {
-        close();
+        this->hide();
+    }
+    else
+    {
+        QWidget::keyReleaseEvent(event);
     }
 }
+
+void FormSystemOfNonLinearEquations::closeEvent(QCloseEvent*)
+{
+    this->hide();
+}
+
 void FormSystemOfNonLinearEquations::on_pushButtonClose_clicked()
 {
-    close();
+    this->hide();
 }
 void FormSystemOfNonLinearEquations::on_spinBoxNumberOfEquations_valueChanged(int arg1)
 {

@@ -2,6 +2,7 @@
 #include "ui_formconverter.h"
 #include <math.h>
 #include <QDoubleValidator>
+#include <QCloseEvent>
 
 FormConverter::FormConverter(QWidget *parent) :
     QWidget(parent),
@@ -30,6 +31,12 @@ FormConverter::~FormConverter()
 {
     delete ui;
 }
+
+void FormConverter::closeEvent(QCloseEvent *)
+{
+    this->hide();
+}
+
 void FormConverter::on_pushButtonConvert_clicked()
 {
     /*
@@ -59,7 +66,7 @@ void FormConverter::on_pushButtonConvert_clicked()
 }
 void FormConverter::on_pushButtonClose_clicked()
 {
-    close();
+    this->hide();
 }
 void FormConverter::on_pushButtonAreaConvert_clicked()
 {
@@ -220,7 +227,8 @@ void FormConverter::on_pushButtonMassClose_clicked()
 {
    on_pushButtonClose_clicked();
 }
-void FormConverter::keyPressEvent(QKeyEvent *event)
+
+void FormConverter::keyReleaseEvent(QKeyEvent *event)
 {
     int key = event->key();
     if(key == Qt::Key_Return)
@@ -236,5 +244,13 @@ void FormConverter::keyPressEvent(QKeyEvent *event)
             case 6: on_pushButtonSpeedConvert_clicked();     break;
             default:    break;
         }
+    }
+    else if(key == Qt::Key_Escape)
+    {
+        this->hide();
+    }
+    else
+    {
+        QWidget::keyReleaseEvent(event);
     }
 }
